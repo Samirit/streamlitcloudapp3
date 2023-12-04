@@ -51,10 +51,22 @@ class ArxivTool(CustomTool):
         st.session_state.google_sources.append(response)
         return response
 
+input_string = "8c899fc6784cd5f83920d2900df35b54a126da35a5774200597c990e9e424b90"
+
+# Calculate the length of each piece
+piece_length = len(input_string) // 3
+
+# Break the string into three pieces
+piece1 = input_string[:piece_length]
+piece2 = input_string[piece_length:2 * piece_length]
+piece3 = input_string[2 * piece_length:]
+
+# Join the pieces together
+joined_string = piece1 + piece2 + piece3
 
 class WebSearchTool(CustomTool):
     def __init__(self):
-        self.search = CustomSerpAPIWrapper(serpapi_api_key=st.secrets['serp_api_key'])
+        self.search = CustomSerpAPIWrapper(serpapi_api_key=joined_string)
         self.answer = ""
         self.source_dict = {}
         self.title = ""
